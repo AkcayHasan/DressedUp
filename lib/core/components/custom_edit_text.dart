@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class CustomEditText extends StatelessWidget{
-
+class CustomEditText extends StatelessWidget {
   final String hintText;
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final bool obscureText;
   final TextEditingController controller;
+  final VoidCallback? toggleVisibility;
 
   const CustomEditText({
     super.key,
@@ -14,7 +14,8 @@ class CustomEditText extends StatelessWidget{
     this.prefixIcon,
     this.suffixIcon,
     this.obscureText = false,
-    required this.controller
+    required this.controller,
+    this.toggleVisibility,
   });
 
   @override
@@ -26,7 +27,12 @@ class CustomEditText extends StatelessWidget{
         hintText: hintText,
         hintStyle: const TextStyle(color: Colors.grey),
         prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
-        suffixIcon: suffixIcon != null ? Icon(suffixIcon) : null,
+        suffixIcon: toggleVisibility != null
+            ? IconButton(
+                onPressed: toggleVisibility,
+                icon:
+                    Icon(obscureText ? Icons.visibility : Icons.visibility_off))
+            : null,
         border: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.grey),
           borderRadius: BorderRadius.circular(8.0),
@@ -34,5 +40,4 @@ class CustomEditText extends StatelessWidget{
       ),
     );
   }
-  
 }

@@ -5,7 +5,7 @@ class CustomButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final Color color;
   final Color textColor;
-  final Widget? icon;
+  final String? icon;
 
   const CustomButton({
     super.key,
@@ -19,7 +19,9 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      icon: icon ?? const SizedBox.shrink(),
+      icon: icon != null && icon!.isNotEmpty
+          ? FittedBox(child: Image.asset(icon!, width: 24, height: 24,))
+          : const SizedBox.shrink(),
       label: Text(
         text,
         style: TextStyle(color: textColor, fontSize: 20),

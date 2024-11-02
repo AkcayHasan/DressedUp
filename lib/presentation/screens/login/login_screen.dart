@@ -2,6 +2,7 @@ import 'package:dressed_up/core/components/custom_button.dart';
 import 'package:dressed_up/core/components/custom_edit_text.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:logger/logger.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,18 +12,24 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final String googleIcon = "assets/icons/google_icon.png";
+
   bool keepSignedIn = false;
-  bool isLoading = false;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
-  get textColor => null;
+  bool _isObscure = true;
 
   @override
   void dispose() {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  void _toggleVisibility() {
+    setState(() {
+      _isObscure = !_isObscure;
+    });
   }
 
   @override
@@ -69,7 +76,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   ]),
             ),
             CustomEditText(
-                hintText: "Password", controller: passwordController),
+              hintText: "Password",
+              controller: passwordController,
+              suffixIcon: Icons.visibility,
+              obscureText: _isObscure,
+              toggleVisibility: _toggleVisibility,
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 20.0),
               child: Row(
@@ -79,7 +91,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 20,
                     child: Checkbox(
                       value: keepSignedIn,
-                      shape: const CircleBorder(),
                       activeColor: const Color(0xff2F4EFF),
                       onChanged: (value) {
                         setState(() {
@@ -100,26 +111,10 @@ class _LoginScreenState extends State<LoginScreen> {
               child: CustomButton(
                   text: "Login",
                   onPressed: () {
-                    setState(() => isLoading = true);
-                    Future.delayed(const Duration(seconds: 2), () {
-                      setState(() => isLoading = false);
-                      // ignore: use_build_context_synchronously
-                      if (mounted) context.push("/register");
-                    });
+                    Logger().d(emailController.text);
                   },
                   color: const Color(0xff2F4EFF),
-                  textColor: Colors.white,
-                  icon: isLoading
-                      ? Container(
-                          width: 24,
-                          height: 24,
-                          padding: const EdgeInsets.all(2.0),
-                          child: const CircularProgressIndicator(
-                            color: Colors.white,
-                            strokeWidth: 3,
-                          ),
-                        )
-                      : const Icon(Icons.account_box, color: Colors.white)),
+                  textColor: Colors.white),
             ),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 20),
@@ -147,16 +142,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
             ),
-            const CustomButton(
-              text: "Continue with Google",
-              color: Colors.grey,
-              textColor: Color(0xff4B5768),
-              icon: Icon(Icons.g_mobiledata_rounded),
+            CustomButton(
+                text: "Continue with Google",
+                color: Colors.grey,
+                textColor: const Color(0xff4B5768),
+                icon: googleIcon),
+            const SizedBox(
+              height: 30,
             ),
-            const SizedBox(height: 30,),
             Center(
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.push("/register");
+                },
                 child: const Text(
                   'Create an account',
                   style: TextStyle(color: Color(0xff2F4EFF)),

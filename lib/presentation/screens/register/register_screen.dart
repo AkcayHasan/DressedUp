@@ -1,6 +1,4 @@
-import 'package:dressed_up/core/components/custom_button.dart';
 import 'package:dressed_up/core/components/custom_edit_text.dart';
-import 'package:dressed_up/presentation/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -74,22 +72,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
             ),
             CustomEditText(hintText: "Password", controller: emailController),
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: CustomButton(text: "Login", onPressed: () {
-                setState(() {
-                  isLoading = true;
-                });
-              }, color: const Color(0xff2F4EFF), textColor: Colors.white, icon: isLoading ? Container(
-              width: 24,
-              height: 24,
-              padding: const EdgeInsets.all(2.0),
-              child: const CircularProgressIndicator(
-                color: Colors.white,
-                strokeWidth: 3,
-              ),
-            ) : const Icon(Icons.account_box, color: Colors.white)),
-            )
+            
           ],
         ),
       ),

@@ -10,6 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  logger: ^2.4.0
+
   # HTTP Requests
   dio: ^5.1.1
 
@@ -36,6 +38,21 @@ dev_dependencies:
   build_runner: ^2.4.6
   json_serializable: ^6.7.1
   mobx_codegen: ^2.1.1
+  flutter_native_splash: ^2.4.2
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/icons/google_icon.png
+    - assets/images/dressed_up_logo.png
+
+flutter_native_splash:
+  android: true
+  ios: true
+  web: false
+  fullscreen: true
+
+  android_12:
+    color: "#f1efe7"
+    image: assets/images/dressed_up_logo.png
+  
