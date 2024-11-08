@@ -5,12 +5,12 @@ import 'package:get_it/get_it.dart';
 // ignore: depend_on_referenced_packages
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 
-void main() {
+void main() async {
 
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  setup();
+  await setup();
   runApp(const DressedUpApp());
 }
 

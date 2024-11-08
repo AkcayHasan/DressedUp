@@ -28,7 +28,7 @@ mixin _$LoginViewModel on _LoginViewModel, Store {
       AsyncAction('_LoginViewModel.login', context: context);
 
   @override
-  Future<void> login(String userName, String password) {
+  Future<NetworkResult<void>> login(String userName, String password) {
     return _$loginAsyncAction.run(() => super.login(userName, password));
   }
 

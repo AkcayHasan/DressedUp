@@ -1,5 +1,5 @@
-import 'package:dressed_up/data/models/user.dart';
+import 'package:dressed_up/data/remote/service/network_result.dart';
 
 abstract class LoginRepository {
-  Future<User> login(String userName, String password);
+  Future<NetworkResult<void>> login(String userName, String password);
 }

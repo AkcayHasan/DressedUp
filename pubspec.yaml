@@ -12,6 +12,9 @@ dependencies:
 
   logger: ^2.4.0
 
+  # Shared Pref
+  shared_preferences: ^2.3.2
+
   # HTTP Requests
   dio: ^5.1.1
 
@@ -19,7 +22,7 @@ dependencies:
   go_router: ^14.3.0
 
   # JSON Serialization
-  json_annotation: ^4.8.0
+  json_annotation: ^4.9.0
 
   # MobX State Management Dependencies
   mobx: ^2.1.1

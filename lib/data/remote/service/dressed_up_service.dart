@@ -1,15 +1,9 @@
-import 'package:dio/dio.dart';
+import 'package:dressed_up/data/models/user.dart';
+import 'package:dressed_up/data/remote/service/network_result.dart';
 
-class DressedUpService {
-  final Dio dio;
+abstract class DressedUpService {
 
-  DressedUpService(this.dio);
+  Future<NetworkResult<void>> login(String userName, String password);
 
-  Future<Map<String, dynamic>> login(String userName, String password) async {
-    if (userName == 'user' && password == 'password') {
-      return {'username': userName, 'token': 'mock_token'};
-    } else {
-      throw Exception('Invalid credentials');
-    }
-  }
+  Future<NetworkResult<User>> register(String firstName, String userName, String password);
 }
